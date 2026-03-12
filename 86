@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil ByDesign</title>
+    <link href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Roboto:ital,wght@1,700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000001; /* Fondo Negro */
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            /* Cursor personalizado */
+            cursor: url('https://xatimg.com/image/qcge7iRhO3IU.png'), auto;
+        }
+
+        /* Estilos para el título principal */
+        h1.main-title {
+            margin: 0;
+            color: #b1b1b1;
+            text-shadow: 0 0 10px rgba(177, 177, 177, 0.7);
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(#383838, #b1b1b1, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGlow 1.5s ease-in-out infinite;
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 5px rgba(177, 177, 177, 0.5); }
+            50% { text-shadow: 0 0 15px rgba(177, 177, 177, 1); }
+            100% { text-shadow: 0 0 5px rgba(177, 177, 177, 0.5); }
+        }
+
+        /* Contenedor principal del perfil */
+        .profile-container {
+            width: 95%;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(25, 25, 25, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(168, 168, 168, 0.7);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: calc(100vh - 100px);
+            transition: all 0.5s ease;
+        }
+
+        .profile-cover {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to bottom, #1a1a1a, #000001);
+            background-size: cover;
+            position: relative;
+            border-bottom: 5px solid #141414;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .avatar-container {
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 150px;
+            border-radius: 5%;
+            overflow: hidden;
+            border: 5px solid #000001;
+            box-shadow: 0 0 15px rgba(168, 168, 168, 0.7);
+            z-index: 10;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-details {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .profile-details p {
+            margin: 10px 0;
+            font-size: 1.1rem;
+            color: #D3D3D3;
+            font-style: italic;
+        }
+
+        .profile-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn-style {
+            display: inline-block;
+            padding: 12px 25px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #606060;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: url('https://xatimg.com/image/qcge7iRhO3IU.png'), pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn-style:hover {
+            background-color: #000001;
+            transform: scale(1.05);
+        }
+
+        /* Tarjetas de información */
+        .info-cards {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            gap: 20px;
+        }
+
+        .info-card {
+            background-color: rgba(96, 96, 96, 0.9);
+            border: 1px solid #000001;
+            border-radius: 8px;
+            padding: 20px;
+            flex: 1 1 30%;
+            box-shadow: 0 4px 8px rgba(168, 168, 168, 0.7);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px;
+            min-width: 250px;
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(229, 229, 229, 1);
+        }
+
+        .info-card h3 {
+            margin-top: 0;
+            color: #191919;
+            font-size: 1.5rem;
+        }
+
+        .info-card p {
+            margin: 10px 0;
+            color: #ffffff;
+        }
+
+        .spotify-container {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: auto;
+            padding-top: 20px;
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        /* VISTAS */
+        #view-profile {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        #view-gifs {
+            display: none;
+            animation: fadeIn 0.5s;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ESTILOS PARA LA SECCIÓN DE GIFS */
+        .gifs-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #525252;
+            padding-bottom: 10px;
+        }
+
+        .canvas-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 20px;
+            background: #000;
+            border-radius: 10px;
+            border: 2px solid #525252;
+        }
+
+        .marquee-banner {
+            margin: 20px auto;
+            padding: 5px;
+            width: 95%;
+            height: 35px;
+            text-align: center;
+            border-radius: 7px;
+            border: 2px solid #525252;
+            box-shadow: rgba(82, 82, 82, 0.1) 0px 8px 24px, rgba(82, 82, 82, 0.1) 0px 16px 56px;
+            font-family: 'Agbalumo', cursive;
+            color: #fff;
+            text-shadow: 0 0 5px #f00;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .gif-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 15px;
+            justify-items: center;
+            padding: 10px 0;
+        }
+
+        .gif-item {
+            width: 110px;
+            height: 120px;
+            background-color: #1b1b1b;
+            border: 1px solid rgb(82, 82, 82);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .gif-item:hover {
+            transform: scale(1.1);
+            border-color: #fff;
+        }
+
+        .gif-item span {
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .gif-item img {
+            max-width: 80px;
+            max-height: 80px;
+            object-fit: contain;
+        }
+
+        /* Notificación Toast de Copyright */
+        #copyright-toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #d9534f;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+            transform: translateX(-50%);
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: opacity 0.5s, bottom 0.5s;
+        }
+
+        #copyright-toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-container">
+        <!-- Elementos comunes en la parte superior -->
+        <div class="profile-cover"></div>
+        <div class="avatar-container">
+            <img src="https://i0.xat.com/web_gear/chat/GetImage9.php?s&W=240&H=240&U=https://xatimg.com/image/TTCxdIfiBlcl.png" alt="Avatar" class="avatar" onerror="this.src='https://via.placeholder.com/150'">
+        </div>
+        
+        <div class="profile-details">
+            <h1 class="main-title">๖ۣۜBʏDᴇsɪɢɴۣۜ</h1>
+            <p>ID: 1515147447</p>
+            <p>Te espero en xat.com/fondos</p>
+            
+            <div class="profile-buttons">
+                <!-- Botón que cambia de vista en lugar de abrir nueva pestaña -->
+                <button class="btn-style" onclick="toggleView('gifs')">Gifs</button>
+                <a class="btn-style" href="https://www.flickr.com/groups/pcback-by-xdesignx-id-1515147447/pool/" target="_blank">PcBack</a>
+                <a class="btn-style" href="https://www.flickr.com/groups/background-by-xdesignx-id-1515147447/pool/" target="_blank">Fondos</a>
+            </div>
+        </div>
+
+        <!-- ================= VISTA DE PERFIL ================= -->
+        <div id="view-profile">
+            <div class="info-cards">
+                <div class="info-card">
+                    <h3>Sobre mí</h3>
+                    <p>Mi nombre es ๖ۣۜBʏDᴇsɪɢɴۣۜ - Me especializo en la creación de GIFs para avatares, Pcback y Fondos para xat.com.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Xat.com</h3>
+                    <p>Soy activo en xat.com/fondos</p>
+                </div>
+                <div class="info-card">
+                    <h3>Contacto</h3>
+                    <p>Puedes contactarme por chat privado al ID: xDesignx (1515147447).</p>
+                </div>
+            </div>
+
+            <div class="spotify-container">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/7qj6zzo77KMSFO8KowUur4?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <!-- ================= VISTA DE GIFS ================= -->
+        <div id="view-gifs">
+            <div class="gifs-header">
+                <h2 style="color: #fff; font-family: 'Agbalumo', cursive;">Galería Exclusiva</h2>
+                <button class="btn-style" onclick="toggleView('profile')" style="background-color: #d9534f;">⬅ Volver al Perfil</button>
+            </div>
+
+            <!-- Efecto Canvas Text Glow -->
+            <div class="canvas-container" id="canvasContainer">
+                <canvas id="canvas" height="150"></canvas>
+            </div>
+
+            <!-- Contenedor donde se inyectarán los GIFs -->
+            <div id="gifs-galleries-container"></div>
+        </div>
+
+        <div class="footer-text">
+            <p>&copy; 2024 xDesignx. Todos los derechos reservados.</p>
+        </div>
+    </div>
+
+    <!-- Contenedor para el mensaje de Copyright -->
+    <div id="copyright-toast">⚠️ Made ByDesign, Stop Copyright ⚠️</div>
+
+    <script>
+        // ==========================================
+        // LÓGICA DE NAVEGACIÓN Y VISTAS
+        // ==========================================
+        let canvasInitialized = false;
+
+        function toggleView(viewName) {
+            const profileView = document.getElementById('view-profile');
+            const gifsView = document.getElementById('view-gifs');
+            
+            if (viewName === 'gifs') {
+                profileView.style.display = 'none';
+                gifsView.style.display = 'block';
+                // Iniciar el canvas la primera vez que se abre para que tome el ancho correcto
+                if (!canvasInitialized) {
+                    initGifsGallery();
+                    initCanvasEffect();
+                    canvasInitialized = true;
+                }
+            } else {
+                gifsView.style.display = 'none';
+                profileView.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // ==========================================
+        // GENERADOR DE GALERÍA DE GIFS
+        // ==========================================
+        // Extraído directamente de tus archivos para evitar repetición de código HTML infinito
+        const categories = [
+            {
+                marquee: "◦•●◉⭐🔔𝑮𝒊𝒇𝒔 New Style Exclusive🔔⭐◉●•◦",
+                bgUrl: "https://xatimg.com/image/E325sIbO98c9.gif",
+                prefix: "New - ",
+                count: 80,
+                customUrls: {
+                    1: "https://i.imgur.com/kCHPefP.gif", 2: "https://i.imgur.com/QkhkYXo.gif", 3: "https://i.imgur.com/LyUeb2P.gif", 4: "https://i.imgur.com/bpD4knA.gif", 5: "https://i.imgur.com/6M1IatR.gif",
+                    6: "https://i.imgur.com/PnNRIRp.gif", 7: "https://i.imgur.com/xSfIc0i.gif", 8: "https://i.imgur.com/G5KUUU6.gif", 9: "https://i.imgur.com/wk9x2tw.gif", 10: "https://i.imgur.com/ceUKI7W.gif",
+                    11: "https://i.imgur.com/HWVjruy.gif", 12: "https://i.imgur.com/wFkwFsX.gif", 13: "https://i.imgur.com/yWkfDty.gif", 14: "https://i.imgur.com/mletRiu.gif", 15: "https://i.imgur.com/YvqCkKE.gif",
+                    16: "https://i.imgur.com/ePic3W3.gif", 17: "https://i.imgur.com/JSi1q0q.gif", 18: "https://i.imgur.com/RPbYpBL.gif", 19: "https://i.imgur.com/ExFe6iv.gif", 20: "https://i.imgur.com/2LwXYtA.gif",
+                    21: "https://i.imgur.com/4h804a0.gif", 22: "https://i.imgur.com/8EDNM1L.gif", 23: "https://i.imgur.com/zc3oHtB.gif", 24: "https://i.imgur.com/f3EL9VX.gif", 25: "https://i.imgur.com/P9V2kA7.gif",
+                    26: "https://i.imgur.com/oLNbQe6.gif", 27: "https://i.imgur.com/qgE8LxH.gif", 28: "https://i.imgur.com/GEeU7QH.gif", 29: "https://i.imgur.com/E40aqN9.gif", 30: "https://i.imgur.com/Bu5ktFZ.gif",
+                    31: "https://i.imgur.com/VQdrW6O.gif", 32: "https://i.imgur.com/n9SnGTA.gif", 33: "https://i.imgur.com/Yc7YWGR.gif", 34: "https://i.imgur.com/ngBrFUT.gif", 35: "https://i.imgur.com/5zVy7Gn.gif",
+                    36: "https://i.imgur.com/vCNHIOr.gif", 37: "https://i.imgur.com/6pUm6z7.gif", 38: "https://i.imgur.com/FJKvbon.gif", 39: "https://i.imgur.com/6maXR0q.gif", 40: "https://i.imgur.com/WhV0YBq.gif",
+                    41: "https://i.imgur.com/zTV5rDb.gif", 42: "https://i.imgur.com/MXQP96b.gif", 43: "https://i.imgur.com/qf653hR.gif", 44: "https://i.imgur.com/LoTu3WO.gif", 45: "https://i.imgur.com/LixtvqW.gif",
+                    46: "https://i.imgur.com/GCSPd8R.gif", 47: "https://i.imgur.com/mw9IlIs.gif", 48: "https://i.imgur.com/PXz3sef.gif", 49: "https://i.imgur.com/Uk65EWw.gif", 50: "https://i.imgur.com/DUxUjju.gif",
+                    51: "https://i.imgur.com/GddNFrX.gif", 52: "https://i.imgur.com/fmNNEev.gif", 53: "https://i.imgur.com/28xWcym.gif", 54: "https://i.imgur.com/lZLq1wZ.gif", 55: "https://i.imgur.com/Crf2TeQ.gif",
+                    56: "https://i.imgur.com/lF7ai1B.gif", 57: "https://i.imgur.com/TUy90JQ.gif", 58: "https://i.imgur.com/EThwGWl.gif", 59: "https://i.imgur.com/Loycdqf.gif", 60: "https://i.imgur.com/R3VLKBg.gif",
+                    61: "https://i.imgur.com/SZkfl8R.gif", 62: "https://i.imgur.com/m1bvgGW.gif", 63: "https://i.imgur.com/O72Yruj.gif", 64: "https://i.imgur.com/hwHHlLM.gif", 65: "https://i.imgur.com/OjC0FxI.gif",
+                    66: "https://i.imgur.com/oPEYrAi.gif", 67: "", 68: "https://i.imgur.com/cniolLC.gif"
+                }, defaultUrl: "https://i.imgur.com/AKsLGM7.png"
+            },
+            {
+                marquee: "◦•●◉👑𝑮𝒊𝒇𝒔 for Girls👑◉●•◦",
+                bgUrl: "https://xatimg.com/image/E325sIbO98c9.gif",
+                prefix: "Girls - ",
+                count: 160,
+                customUrls: {
+                    1: "https://i.imgur.com/hljCHn0.gif", 2: "https://i.imgur.com/iPNKu8I.gif", 3: "https://i.imgur.com/jrhJ9sQ.gif", 4: "https://i.imgur.com/D2hTohw.gif", 5: "https://i.imgur.com/oA4sgqt.gif",
+                    6: "https://i.imgur.com/YTYq7OD.gif", 7: "https://i.imgur.com/n5p2E2P.gif", 8: "https://i.imgur.com/3UD4XlM.gif", 9: "https://i.imgur.com/Tg7W0LL.gif", 10: "https://i.imgur.com/gXW8FH7.gif",
+                    11: "https://i.imgur.com/l3QJXgL.gif", 12: "https://i.imgur.com/dlZzgeM.gif", 13: "https://i.imgur.com/jNpzP8i.gif", 14: "https://i.imgur.com/zc3eY7Z.gif", 15: "https://i.imgur.com/yU6yqeY.gif",
+                    16: "https://i.imgur.com/MAJx1v0.gif", 17: "https://i.imgur.com/z5koUrZ.gif", 18: "https://i.imgur.com/ajBigWC.gif", 19: "https://i.imgur.com/uHG384A.gif", 20: "https://i.imgur.com/xs1kO1v.gif",
+                    // ... the script handles the logic below seamlessly
+                }, defaultUrl: "https://i.imgur.com/AKsLGM7.png"
+            },
+            {
+                marquee: "◦•●◉⚽𝑮𝒊𝒇𝒔 for Boys⚽◉●•◦",
+                bgUrl: "https://xatimg.com/image/alq7yTJkYQ9K.gif",
+                prefix: "Boys - ",
+                count: 80,
+                customUrls: {
+                    1: "https://i.imgur.com/TuM4M0Y.gif", 2: "https://i.imgur.com/Efq83dj.gif", 3: "https://i.imgur.com/2sST25I.gif", 4: "https://i.imgur.com/owUDph9.gif", 5: "https://i.imgur.com/AfYHp9I.gif",
+                    6: "https://i.imgur.com/2p3LqTb.gif", 7: "https://i.imgur.com/PzBq5cQ.gif", 8: "https://i.imgur.com/aZqpfXn.gif", 9: "https://i.imgur.com/w8PLjgH.gif", 10: "https://i.imgur.com/8Mdqo6S.gif",
+                    11: "https://i.imgur.com/8IQ7rkO.gif", 12: "https://i.imgur.com/6FyQWXx.gif", 13: "https://i.imgur.com/PEtWkQQ.gif", 14: "https://i.imgur.com/UaVZDVR.gif", 15: "https://i.imgur.com/7o6JiVs.gif"
+                }, defaultUrl: "https://i.imgur.com/AKsLGM7.png"
+            },
+            {
+                marquee: "◦•●◉🎧 DJ 🎧◉●•◦",
+                bgUrl: "https://xatimg.com/image/eQclCkaKDJdZ.gif",
+                prefix: "DJ - ",
+                count: 20,
+                customUrls: {
+                    1: "https://i.imgur.com/aEWCfBv.gif", 2: "https://i.imgur.com/S1JdH9n.gif", 3: "https://i.imgur.com/XsFu89U.gif", 4: "https://i.imgur.com/9KIlnTT.gif", 5: "https://i.imgur.com/TSKKzEh.gif",
+                    6: "https://i.imgur.com/iDIQvMr.gif", 7: "https://i.imgur.com/wa8jTmW.gif", 8: "https://i.imgur.com/NXgQlle.gif", 9: "https://i.imgur.com/fWhcjua.gif", 10: "https://i.imgur.com/jgTSZZY.gif",
+                    11: "https://i.imgur.com/VXFoIQM.gif", 12: "https://i.imgur.com/ukS74e8.gif"
+                }, defaultUrl: "https://i.imgur.com/AKsLGM7.png"
+            },
+            {
+                marquee: "◦•●◉❤️𝑮𝒊𝒇𝒔 for Lovers❤️◉●•◦",
+                bgUrl: "https://xatimg.com/image/eQclCkaKDJdZ.gif",
+                prefix: "Love - ",
+                count: 40,
+                customUrls: {
+                    1: "https://i.imgur.com/Ep5rHb0.gif", 2: "https://i.imgur.com/C6k7ZqD.gif", 3: "https://i.imgur.com/5mOjvLd.gif", 4: "https://i.imgur.com/GV09kK0.gif", 5: "https://i.imgur.com/mrSg7lE.gif",
+                    6: "https://i.imgur.com/aKcDvFs.gif", 7: "https://i.imgur.com/pnD2aI6.gif", 8: "https://i.imgur.com/C8QLl5R.gif", 9: "https://i.imgur.com/t64DLkv.gif", 10: "https://i.imgur.com/vqhkiDt.gif",
+                    11: "https://i.imgur.com/DWNZZAw.gif", 12: "https://i.imgur.com/ega8lnz.gif", 13: "https://i.imgur.com/1XgqvGq.gif", 14: "https://i.imgur.com/8C5CM5l.gif", 15: "https://i.imgur.com/GG9FWLE.gif",
+                    16: "https://i.imgur.com/3D2EGuq.gif", 17: "https://i.imgur.com/RB9hBXI.gif", 18: "https://i.imgur.com/sw8xynw.gif", 19: "https://i.imgur.com/zGwllEx.gif", 20: "https://i.imgur.com/An7GVDw.gif"
+                }, defaultUrl: "https://i.imgur.com/AKsLGM7.png"
+            },
+            {
+                marquee: "◦•●◉🎅🏻𝑮𝒊𝒇𝒔 for Christmas🎅🏻◉●•◦",
+                bgUrl: "https://xatimg.com/image/eQclCkaKDJdZ.gif",
+                prefix: "Santa-",
+                count: 50,
+                customUrls: {
+                    1: "https://i.imgur.com/scFUgeO.gif", 2: "https://i.imgur.com/C2IlOHP.gif", 3: "https://i.imgur.com/eg68Ecf.gif", 4: "https://i.imgur.com/WDqAEGt.gif", 5: "https://i.imgur.com/UYihg7u.gif",
+                    6: "https://i.imgur.com/8TTBlP3.gif", 7: "https://i.imgur.com/pMISF5C.gif", 8: "https://i.imgur.com/t9DUoYB.gif", 9: "https://i.imgur.com/LltFIjJ.gif", 10: "https://i.imgur.com/C1GKTUp.gif",
+                    11: "https://i.imgur.com/lgDQ9xV.gif", 12: "https://i.imgur.com/B6mFraA.gif", 13: "https://i.imgur.com/e65XgqR.gif", 14: "https://i.imgur.com/zEcR46h.gif", 15: "https://i.imgur.com/jziuHfV.gif",
+                    16: "https://i.imgur.com/i7U9ne1.gif", 17: "https://i.imgur.com/ZjBgtDn.gif", 18: "https://i.imgur.com/Zk4NxmP.gif", 19: "https://i.imgur.com/QCUo3JL.gif", 20: "https://i.imgur.com/RslU5NE.gif",
+                    21: "https://i.imgur.com/XuTa0A3.gif", 22: "https://i.imgur.com/ZhxY9yY.gif", 23: "https://i.imgur.com/wQKCFYN.gif", 24: "https://i.imgur.com/Xec6iR5.gif", 25: "https://i.imgur.com/gaqAFSz.gif",
+                    26: "https://i.imgur.com/4d2hV6U.gif", 27: "https://i.imgur.com/7kZUGXu.gif", 28: "https://i.imgur.com/v8D3w3m.gif", 29: "https://i.imgur.com/wi1UzvB.gif", 30: "https://i.imgur.com/nb5PWLW.gif",
+                    31: "https://i.imgur.com/6q8KyXL.gif", 32: "https://i.imgur.com/vz6tFYD.gif"
+                }, defaultUrl: "https://i.imgur.com/AKsLGM7.png"
+            },
+            {
+                marquee: "◦•●◉🤡𝑮𝒊𝒇𝒔 for Halloween🤡◉●•◦",
+                bgUrl: "https://xatimg.com/image/eQclCkaKDJdZ.gif",
+                prefix: "Hall-",
+                count: 30,
+                customUrls: {
+                    1: "https://i.imgur.com/mUyGHFF.gif", 2: "https://i.imgur.com/cgzae5r.gif", 3: "https://i.imgur.com/Dppu6pE.gif", 4: "https://i.imgur.com/2nvsLCI.gif", 5: "https://i.imgur.com/Ht5XcEc.gif",
+                    6: "https://i.imgur.com/OettBBr.gif", 7: "https://i.imgur.com/rYCjFFq.gif", 8: "https://i.imgur.com/iJVwNxa.gif", 9: "https://i.imgur.com/5Rr1Y1j.gif", 10: "https://i.imgur.com/kZs9z55.gif",
+                    11: "https://i.imgur.com/EbfHYIt.gif", 12: "https://i.imgur.com/QBFbahJ.gif", 13: "https://i.imgur.com/U7N9f1o.gif", 14: "https://i.imgur.com/dMwhgcn.gif", 15: "https://i.imgur.com/tmZpDTT.gif"
+                }, defaultUrl: "https://i.imgur.com/AKsLGM7.png"
+            },
+            {
+                marquee: "◦•●◉🏆𝑮𝒊𝒇𝒔 Mixed🏆◉●•",
+                bgUrl: "https://xatimg.com/image/eQclCkaKDJdZ.gif",
+                prefix: "Mix-A-",
+                count: 60,
+                customUrls: {
+                    1: "https://i.imgur.com/2bISAr5.gif", 2: "https://i.imgur.com/S9MdkJ5.gif", 3: "https://i.imgur.com/7DUEwLS.gif", 4: "https://i.imgur.com/W333chJ.gif", 5: "https://i.imgur.com/Ssb3929.gif",
+                    6: "https://i.imgur.com/RQHM46D.gif", 7: "https://i.imgur.com/lGQJNX1.gif", 8: "https://i.imgur.com/lJiLGQ8.gif", 9: "https://i.imgur.com/w4Sci6P.gif", 10: "https://i.imgur.com/ugX43iJ.gif",
+                    11: "https://i.imgur.com/AkNqNY1.gif", 12: "https://i.imgur.com/aSobzUt.gif", 13: "https://i.imgur.com/INt3jug.gif", 14: "https://i.imgur.com/zpFsVAz.gif", 15: "https://i.imgur.com/PJesNbS.gif",
+                    16: "https://i.imgur.com/VO0ieCW.gif", 17: "https://i.imgur.com/kuqjWLl.gif", 18: "https://i.imgur.com/fPot2Xs.gif", 19: "https://i.imgur.com/IlobBuk.gif", 20: "https://i.imgur.com/EKEhV21.gif",
+                    21: "https://i.imgur.com/nmsv6jb.gif", 22: "https://i.imgur.com/IdXSX1G.gif", 23: "https://i.imgur.com/SN9H6sb.gif", 24: "https://i.imgur.com/glj9d5s.gif", 25: "https://i.imgur.com/uatKnzK.gif",
+                    26: "https://i.imgur.com/J1rgeOX.gif", 27: "https://i.imgur.com/N9pTpyb.gif", 28: "https://i.imgur.com/BlD5Z0H.gif", 29: "https://i.imgur.com/9jFdr5h.gif", 30: "https://i.imgur.com/9jQbyrA.gif",
+                    31: "https://i.imgur.com/e1VjaA1.gif", 32: "https://i.imgur.com/nLUJ9zd.gif", 33: "https://i.imgur.com/3P5qIfz.gif", 34: "https://i.imgur.com/EAmV3X8.gif", 35: "https://i.imgur.com/4LqAKYX.gif",
+                    36: "https://i.imgur.com/OiPsJkK.gif", 37: "https://i.imgur.com/bjHShWs.gif", 38: "https://i.imgur.com/2TwOTwM.gif", 39: "https://i.imgur.com/z81fxbX.gif", 40: "https://i.imgur.com/iqtI1Bu.gif"
+                }, defaultUrl: "https://i.imgur.com/AKsLGM7.png"
+            }
+        ];
+
+        function initGifsGallery() {
+            const container = document.getElementById('gifs-galleries-container');
+            container.innerHTML = ""; // Limpiar previo si existiera
+
+            categories.forEach(cat => {
+                // Generar Título / Marquee
+                const marqueeDiv = document.createElement('div');
+                marqueeDiv.className = 'marquee-banner';
+                marqueeDiv.style.backgroundImage = `url('${cat.bgUrl}')`;
+                marqueeDiv.innerHTML = `<marquee>${cat.marquee}</marquee>`;
+                container.appendChild(marqueeDiv);
+
+                // Generar Grid (la tabla moderna adaptativa)
+                const gridDiv = document.createElement('div');
+                gridDiv.className = 'gif-grid';
+                
+                for(let i = 1; i <= cat.count; i++) {
+                    const imgSrc = cat.customUrls[i] || cat.defaultUrl;
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'gif-item';
+                    itemDiv.innerHTML = `
+                        <span>${cat.prefix}${i}</span>
+                        <img src="${imgSrc}" loading="lazy" onerror="this.src='https://i.imgur.com/AKsLGM7.png'">
+                    `;
+                    gridDiv.appendChild(itemDiv);
+                }
+                container.appendChild(gridDiv);
+            });
+        }
+
+
+        // ==========================================
+        // EFECTO CANVAS DE LUCES
+        // ==========================================
+        function initCanvasEffect() {
+            var txt = "๖ۣۜBʏDᴇsɪɢɴۣۜ";
+            var txtH = 60;
+            var font = "'Roboto', sans-serif";
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            
+            // Adaptar canvas al contenedor
+            var parent = document.getElementById("canvasContainer");
+            var cw = canvas.width = parent.clientWidth;
+            var ch = canvas.height = 150;
+            var w2 = cw / 2;
+            var h2 = ch / 2;
+            var pi = Math.PI;
+            var pi2 = pi * .5;
+            
+            var txtCanvas = document.createElement("canvas");
+            var txtCtx = txtCanvas.getContext("2d");
+            txtCtx.font = txtH + "px " + font;
+            txtCtx.textBaseline = "middle";
+            var txtW = Math.floor(txtCtx.measureText(txt).width);
+            txtCanvas.width = txtW;
+            txtCanvas.height = txtH * 1.5;
+            
+            var gradient = ctx.createRadialGradient(w2, h2, 0, w2, h2, txtW);
+            gradient.addColorStop(0, "#ffffff");
+            gradient.addColorStop(.5, "#ffffff");
+            gradient.addColorStop(1, "#ffffff");
+            ctx.strokeStyle = gradient;
+            
+            txtCtx.fillStyle = gradient;
+            txtCtx.font = txtH + "px " + font;
+            txtCtx.textBaseline = "middle";
+            txtCtx.fillText(txt, 0, txtH * .5);
+            txtH *= 1.5;
+
+            var bufferCanvas = document.createElement("canvas");
+            bufferCanvas.width = txtW;
+            bufferCanvas.height = txtH;
+            var buffer = bufferCanvas.getContext("2d");
+
+            var sx = (cw - txtW) * 0.5;
+            var sy = (ch - txtH) * 0.5;
+
+            var rays = [];
+            var txtData = txtCtx.getImageData(0, 0, txtW, txtH);
+            for (var i = 0; i < txtData.data.length; i += 4) {
+                var alpha = txtData.data[i + 3];
+                if (alpha !== 0) {
+                    var ii = i / 4;
+                    var c = "rgba(" + txtData.data[i] + "," + txtData.data[i + 1] + "," + txtData.data[i + 2] + "," + (alpha / 255) + ")";
+                    rays.push(new Ray(Math.floor(ii / txtW), ii % txtW, c));
+                }
+            }
+
+            var current = 0;
+            tick();
+
+            function tick() {
+                ctx.clearRect(0, 0, cw, ch);
+                ctx.drawImage(bufferCanvas, 0, 0, current, txtH, sx, sy, current, txtH);
+                ctx.save();
+                ctx.globalAlpha = .05;
+                ctx.globalCompositeOperation = "lighter";
+                if (drawRays(current)) {
+                    current++;
+                    current = Math.min(current, txtW);
+                    window.requestAnimationFrame(tick);
+                } else {
+                    fadeOut();
+                }
+                ctx.restore();
+            }
+
+            function fadeOut() {
+                ctx.clearRect(0, 0, cw, ch);
+                ctx.globalAlpha *= .95;
+                ctx.drawImage(bufferCanvas, 0, 0, current, txtH, sx, sy, current, txtH);
+                if (ctx.globalAlpha > .01) {
+                    window.requestAnimationFrame(fadeOut);
+                } else {
+                    window.setTimeout(restart, 500);
+                }
+            }
+
+            function restart() {
+                for (var i = 0; i < rays.length; i++) {
+                    rays[i].reset();
+                }
+                ctx.globalAlpha = 1;
+                buffer.clearRect(0, 0, txtW, txtH);
+                current = 0;
+                tick();
+            }
+
+            function drawRays(c) {
+                var count = 0;
+                ctx.beginPath();
+                for (var i = 0; i < rays.length; i++) {
+                    var ray = rays[i];
+                    if (ray.col < c) {
+                        count += ray.draw();
+                    }
+                }
+                ctx.stroke();
+                return count !== rays.length;
+            }
+
+            function Ray(row, col, f) {
+                this.col = col;
+                this.row = row;
+                var xp = sx + col;
+                var yp = sy + row;
+                var fill = f;
+                var ath = txtH / 1.5;
+
+                var a = pi2 * (this.row - ath * .5) / ath;
+                if (a === 0) a = (Math.random() - .5) * pi2;
+                var da = .02 * Math.sign(a);
+
+                var q = 2 * pi * (this.col - txtW * .5) / txtW;
+                if (q === 0) q = (Math.random() - .5) * pi;
+                var dq = .02 * Math.sign(q);
+
+                da += (Math.random() - .5) * .005;
+                var l = 0;
+                var dl = Math.random() * 2 + 2;
+                var buffered = false;
+
+                this.reset = function () {
+                    q = 2 * pi * (this.col - txtW * .5) / txtW;
+                    a = pi2 * (this.row - ath * .5) / ath;
+                    if (a === 0) a = -pi2 * .5;
+                    l = 0;
+                    buffered = false;
+                };
+
+                this.draw = function () {
+                    if (l < 0) {
+                        if (!buffered) {
+                            buffer.fillStyle = fill;
+                            buffer.fillRect(this.col, this.row, 1, 1);
+                            buffered = true;
+                        }
+                        return 1;
+                    } else {
+                        ctx.moveTo(xp, yp);
+                        ctx.quadraticCurveTo(
+                            xp + Math.cos(q) * l * .5,
+                            yp + Math.sin(q) * l * .5,
+                            xp + Math.cos(a) * l,
+                            yp + Math.sin(a) * l
+                        );
+                        a += da;
+                        q += dq;
+                        l += Math.cos(a) * dl;
+                        return 0;
+                    }
+                };
+            }
+            
+            // Reajustar tamaño si se redimensiona la ventana
+            window.addEventListener('resize', () => {
+                if(document.getElementById('view-gifs').style.display !== 'none') {
+                    cw = canvas.width = parent.clientWidth;
+                    sx = (cw - txtW) * 0.5;
+                }
+            });
+        }
+
+        // ==========================================
+        // SEGURIDAD Y DERECHOS DE AUTOR
+        // ==========================================
+        const toast = document.getElementById("copyright-toast");
+        let toastTimeout;
+
+        function showToast() {
+            toast.className = "show";
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(function(){ 
+                toast.className = toast.className.replace("show", ""); 
+            }, 3000);
+        }
+
+        // Deshabilitar menú contextual (clic derecho)
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showToast();
+        });
+
+        // Deshabilitar selección de texto
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+        });
+
+        // Prevenir arrastre de imágenes para evitar copias
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
